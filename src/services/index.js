@@ -46,11 +46,13 @@ export const createPatient = async (patientData) => {
 
 // Update an existing patient record by ID
 export const updatePatient = async (id, updatedData) => {
-  console.log(id, updatedData);
   const patientRef = doc(db, "patients", id);
   try {
-    await updateDoc(patientRef, updatedData);
-    return { id: id, status: "Patient updated successfully" };
+    const response = await updateDoc(patientRef, updatedData);
+    if (!response) {
+      return updatedData;
+    }
+    return { updatedPatient: response, status: "Patient updated successfully" };
   } catch (error) {
     console.error("Error updating patient: ", error);
     return { status: "Error updating patient", error };

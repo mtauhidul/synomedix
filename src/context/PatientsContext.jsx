@@ -1,5 +1,4 @@
 import * as React from "react";
-import { getPatients } from "../services";
 
 export const PatientsContext = React.createContext();
 
@@ -13,23 +12,11 @@ const PatientsProvider = ({ children }) => {
   const [cons, setCons] = React.useState([]);
   const [sort, setSort] = React.useState("");
 
-  const fetchData = async () => {
-    try {
-      const response = await getPatients();
-      setData(response);
-
-      setPatients(response);
-      setAllPatients(response);
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-    }
-  };
-
   React.useEffect(() => {
-    fetchData();
-  }, []);
+    setData(patients);
+    setAllPatients(patients);
+  }, [patients]);
 
-  // This function works for the "Show Low Risk Patients" toggle button which is in the Setting page
   const toggleFilter = () => {
     setShowLowRisk((prev) => !prev);
     localStorage.setItem("showLowRisk", !showLowRisk);
@@ -301,25 +288,20 @@ const PatientsProvider = ({ children }) => {
     setAllPatients(data);
   }, []);
 
-  const updatePatientData = (patient) => {
-    console.log("before update: CP", patient);
-    const updatedPatients = patients.filter((p) =>
-      p.id !== patient.id ? p : patient
-    );
-
-    console.log("updatedPatients: CP", updatedPatients);
-
-    setPatients(updatedPatients);
+  const updatePatientsData = (patient) => {
+    const temporaryPatients = [...patients];
+    const index = temporaryPatients.findIndex((p) => p.id === patient.id);
+    temporaryPatients[index] = patient;
+    setPatients(temporaryPatients);
   };
-
-  console.log("after update: CP", patients);
 
   return (
     <PatientsContext.Provider
       value={{
         patients,
+        setPatients,
         data,
-        updatePatientData,
+        updatePatientsData,
         filterByConditionsArray,
         filterByCategory,
         filterByNameAndId,

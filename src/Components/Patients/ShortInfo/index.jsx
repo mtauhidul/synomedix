@@ -26,7 +26,7 @@ const ShortInfoCard = ({
 }) => {
   const location = useLocation().pathname?.split("/")[1];
   const { toggleDrawer } = useSidebar();
-  const { patients, updatePatientData } = usePatientsData();
+  const { patients, updatePatientsData } = usePatientsData();
   const [loading, setLoading] = React.useState(false);
 
   const actualFLagLength = flags?.length;
@@ -42,7 +42,7 @@ const ShortInfoCard = ({
         const updatedPatient = await updatePatient(id, response);
 
         if (updatedPatient) {
-          updatePatientData(updatedPatient);
+          updatePatientsData(updatedPatient);
           console.log("Patient updated successfully");
         }
 
@@ -54,6 +54,8 @@ const ShortInfoCard = ({
       setLoading(false); // Stop loading
     }
   };
+
+  console.log(patients);
 
   return (
     <>
@@ -108,6 +110,7 @@ const ShortInfoCard = ({
               onClick={() => diagnose(id)}
               variant="outlined"
               size="small"
+              disabled={flags[0]?.topRiskFactors[0] !== "Test One"}
             >
               {loading ? (
                 <Box sx={{ display: "flex" }}>

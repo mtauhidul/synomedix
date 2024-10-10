@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import Patients from "../Components/Patients";
 import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/Sidebar";
-import Patients from "../Components/Patients";
 
 const Layout = ({ children }) => {
   return (
@@ -11,7 +10,6 @@ const Layout = ({ children }) => {
         display: "flex",
       }}
     >
-      {/* this component is left sidebar */}
       <Sidebar />
 
       <Box
@@ -20,7 +18,6 @@ const Layout = ({ children }) => {
           padding: "0 10px",
         }}
       >
-        {/* This component is the top search bar */}
         <SearchBar />
 
         <Box
@@ -29,10 +26,8 @@ const Layout = ({ children }) => {
             alignItems: "stretch",
           }}
         >
-          {/* All Patients */}
           <Patients />
 
-          {/* Patient's details */}
           <Box
             sx={{
               marginLeft: {
