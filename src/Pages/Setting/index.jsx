@@ -38,7 +38,7 @@ const Setting = () => {
     if (response) {
       setLoading(false);
       showSnackbar("Data reset successfully");
-      console.log("Data reset successfully");
+      // console.log("Data reset successfully");
 
       setTimeout(() => {
         hideSnackbar();

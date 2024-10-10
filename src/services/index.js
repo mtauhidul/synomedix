@@ -28,7 +28,7 @@ export const getPatient = async function (id) {
   if (docSnap.exists()) {
     return { id: docSnap.id, ...docSnap.data() };
   } else {
-    console.log("No such patient exists!");
+    // console.log("No such patient exists!");
     return null;
   }
 };

@@ -56,7 +56,7 @@ export const handlePatientDataUpdate = async (patientData) => {
     responseContent = responseContent.replace(/```json|```/g, "").trim();
 
     const updatedData = JSON.parse(responseContent);
-    console.log(updatedData);
+    // console.log(updatedData);
     return updatedData;
   } catch (error) {
     console.error("Error updating patient data:", error);

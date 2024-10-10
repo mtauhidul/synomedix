@@ -56,7 +56,7 @@ const ShortInfoCard = ({
         if (updatedPatient) {
           showSnackbar("Patient diagnosed successfully");
           updatePatientsData(updatedPatient);
-          console.log("Patient updated successfully");
+          // console.log("Patient updated successfully");
         }
       }
 
