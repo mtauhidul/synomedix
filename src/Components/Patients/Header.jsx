@@ -7,7 +7,7 @@ import { usePatientsData } from "../../context/PatientsContext";
 import styles from "./Header.module.scss";
 
 const Header = () => {
-  const data = usePatientsData().patients;
+  const { data } = usePatientsData();
   const { filterByCategory, filterByConditionsArray } = usePatientsData();
   const [open, setOpen] = useState(false);
   const [riskOpen, setRiskOpen] = useState(false);

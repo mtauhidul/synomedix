@@ -5,7 +5,8 @@ import {
   FormGroup,
   Switch,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import CustomSnackbar from "../../Components/CustomSnackbar/CustomSnackbar";
 import { useFishbone } from "../../context/FishboneContext";
 import { usePatientsData } from "../../context/PatientsContext";
 import { useVital } from "../../context/VitalContext";
@@ -13,6 +14,18 @@ import { resetData } from "../../services";
 import styles from "./Setting.module.scss";
 
 const Setting = () => {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const showSnackbar = (msg) => {
+    setMessage(msg);
+    setSnackbarOpen(true);
+  };
+
+  const hideSnackbar = () => {
+    setSnackbarOpen(false);
+  };
+
   const { toggleView, state } = useFishbone();
   const { toggleVitalView, vitalState } = useVital();
   const { filterByCategory, filterOn, toggleFilter, showLowRisk } =
@@ -24,9 +37,20 @@ const Setting = () => {
     const response = await resetData();
     if (response) {
       setLoading(false);
+      showSnackbar("Data reset successfully");
       console.log("Data reset successfully");
+
+      setTimeout(() => {
+        hideSnackbar();
+      }, 3000);
     } else {
+      setLoading(false);
+      showSnackbar("Error resetting data");
       console.error("Error resetting data");
+
+      setTimeout(() => {
+        hideSnackbar();
+      }, 3000);
     }
   };
 
@@ -51,7 +75,8 @@ const Setting = () => {
           label="Show Vitals"
         />
       </FormGroup>
-      {/* Reset all data button */}
+      <br />
+      <br />
       <Button variant="contained" color="error" onClick={resetAllData}>
         {loading ? (
           <CircularProgress size="24px" color="inherit" />
@@ -59,6 +84,11 @@ const Setting = () => {
           "Reset All Data"
         )}
       </Button>
+      <CustomSnackbar
+        message={message}
+        open={snackbarOpen}
+        handleClose={hideSnackbar}
+      />
     </div>
   );
 };

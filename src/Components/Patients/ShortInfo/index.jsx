@@ -2,8 +2,9 @@ import { Box, Button, CircularProgress } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import CustomSnackbar from "../../../Components/CustomSnackbar/CustomSnackbar";
 import { usePatientsData } from "../../../context/PatientsContext";
 import { useSidebar } from "../../../context/SidebarContext";
 import { updatePatient } from "../../../services";
@@ -24,6 +25,17 @@ const ShortInfoCard = ({
   section,
   sex,
 }) => {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const showSnackbar = (msg) => {
+    setMessage(msg);
+    setSnackbarOpen(true);
+  };
+
+  const hideSnackbar = () => {
+    setSnackbarOpen(false);
+  };
   const location = useLocation().pathname?.split("/")[1];
   const { toggleDrawer } = useSidebar();
   const { patients, updatePatientsData } = usePatientsData();
@@ -42,20 +54,29 @@ const ShortInfoCard = ({
         const updatedPatient = await updatePatient(id, response);
 
         if (updatedPatient) {
+          showSnackbar("Patient diagnosed successfully");
           updatePatientsData(updatedPatient);
           console.log("Patient updated successfully");
         }
-
-        console.log(patients.map((patient) => patient.id === id));
       }
+
+      setTimeout(() => {
+        hideSnackbar();
+      }, 3000);
+
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
+      showSnackbar("Error diagnosing patient");
       console.error("Error updating patient:", error);
+
+      setTimeout(() => {
+        hideSnackbar();
+      }, 3000);
     } finally {
       setLoading(false); // Stop loading
     }
   };
-
-  console.log(patients);
 
   return (
     <>
@@ -174,6 +195,11 @@ const ShortInfoCard = ({
           margin: "0 auto",
           backgroundColor: "var(--primary-border-color)",
         }}
+      />
+      <CustomSnackbar
+        message={message}
+        open={snackbarOpen}
+        handleClose={hideSnackbar}
       />
     </>
   );
