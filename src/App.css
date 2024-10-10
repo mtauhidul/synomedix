@@ -1,0 +1,25 @@
+:root {
+  --primary-bg: #f2f7ff;
+  /* --sidebar-bg: #266df9; */
+  --sidebar-bg: #06102e;
+  --selected-bg: #f8fbff;
+  /* --selected-bg: #b8dadf4d; */
+
+  --primary-border-color: #dae5ff;
+  --high-border-color: #eaa7b3;
+  --low-border-color: #99b5de;
+  --medium-border-color: #edc486;
+
+  --primary-color: #303e65;
+}
+
+.App {
+  background-color: var(--primary-bg);
+  box-sizing: border-box;
+}
+
+select:focus {
+  outline: none;
+  border: none;
+  background-color: transparent !important;
+}

@@ -1,0 +1,129 @@
+.__wrapper {
+  width: 100%;
+  min-height: 250px;
+  box-sizing: border-box;
+  margin-top: 20px;
+
+  @media (min-width: 768px) {
+    width: 48%;
+  }
+
+  @media (min-width: 1980px) {
+    width: 32%;
+  }
+
+  @media (min-width: 2560px) {
+    width: 24%;
+  }
+
+  @media (min-width: 1150px) and (max-width: 1360px) {
+    width: 32%;
+  }
+
+
+
+
+
+
+
+
+
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 30px;
+  padding: 20px;
+
+  .__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .__flag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .type {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .title {
+    margin: 12px 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--primary-color);
+  }
+
+  .__completed_test {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    .level {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+
+      .label {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: rgba(48, 62, 101, 0.7);
+        cursor: pointer;
+      }
+
+      .tick {
+        height: 11px;
+        width: 12.6px;
+        color: #3a8a50;
+        fill: #3a8a50;
+      }
+    }
+  }
+
+  .__not_completed_test {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+
+    .level {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      cursor: pointer;
+
+      .unchecked {
+        height: 11px;
+        width: 11px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 1px solid rgba(48, 62, 101, 0.7);
+      }
+
+      .label {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: rgba(48, 62, 101, 0.7);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .riskFactor {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgba(48, 62, 101, 0.7);
+  }
+}

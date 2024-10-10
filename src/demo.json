@@ -1,0 +1,176 @@
+{
+  "CBC_fishbone": { "plts": 223, "wbc": 10.2, "hgb": 12.3, "hct": 37 },
+  "vitals": { "pox": 99, "rr": 17, "bp": "117/68", "t": 101.3, "p": 67 },
+  "bed": 9,
+  "age": 62,
+  "room": 3,
+  "sex": "F",
+  "lastName": "Wang",
+  "BMP_fishbone": {
+    "na": 140,
+    "k": 4,
+    "bun": 15,
+    "glucose": 100,
+    "creatinine": 0.9,
+    "hco3": 27,
+    "cl": 100
+  },
+  "id": "8JH89R",
+  "flags": [
+    {
+      "topRiskFactors": [
+        "History of antibiotic use",
+        "Recent hospitalization",
+        "Advanced age",
+        "Underlying GI disorders",
+        "Immunocompromised status"
+      ],
+      "risk": "HIGH",
+      "type": "CDIFF",
+      "id": "10",
+      "interventions": [
+        {
+          "id": "1",
+          "name": "Initiate Vancomycin treatment",
+          "date": "2022-12-11T11:20:00.000Z",
+          "isCompleted": false
+        },
+        {
+          "name": "Obtain stool sample for testing",
+          "date": "2022-12-11T11:20:00.000Z",
+          "id": "2",
+          "isCompleted": false
+        },
+        {
+          "id": "3",
+          "name": "Implement contact precautions",
+          "isCompleted": true,
+          "date": "2022-12-11T11:20:00.000Z"
+        },
+        {
+          "date": "2022-12-11T11:20:00.000Z",
+          "id": "4",
+          "isCompleted": false,
+          "name": "Monitor renal function"
+        },
+        {
+          "isCompleted": false,
+          "id": "5",
+          "name": "Hydration Status Assessment",
+          "date": "2022-12-11T11:20:00.000Z"
+        },
+        {
+          "name": "Educate patient on hand hygiene",
+          "date": "2022-12-11T11:20:00.000Z",
+          "id": "6",
+          "isCompleted": false
+        }
+      ]
+    },
+    {
+      "type": "Sepsis",
+      "topRiskFactors": [
+        "Immunocompromised state",
+        "Recent surgery or invasive procedure",
+        "Chronic medical conditions (e.g., diabetes, COPD)",
+        "Presence of indwelling catheters",
+        "Skin breakdown or infection"
+      ],
+      "id": "11",
+      "interventions": [
+        {
+          "isCompleted": true,
+          "id": "1",
+          "date": "2022-12-11T11:20:00.000Z",
+          "name": "Administer IV fluids and vasopressors as needed"
+        },
+        {
+          "name": "Blood cultures and sensitivity tests",
+          "isCompleted": false,
+          "id": "2",
+          "date": "2022-12-11T11:20:00.000Z"
+        },
+        {
+          "date": "2022-12-11T11:20:00.000Z",
+          "name": "Start broad-spectrum antibiotics",
+          "id": "3",
+          "isCompleted": false
+        },
+        {
+          "isCompleted": false,
+          "name": "Monitor vital signs every hour",
+          "date": "2022-12-11T11:20:00.000Z",
+          "id": "4"
+        },
+        {
+          "date": "2022-12-11T11:20:00.000Z",
+          "isCompleted": false,
+          "name": "Assess and document urine output",
+          "id": "5"
+        },
+        {
+          "name": "Evaluate for potential source of infection",
+          "isCompleted": false,
+          "date": "2022-12-11T11:20:00.000Z",
+          "id": "6"
+        }
+      ],
+      "risk": "MEDIUM"
+    },
+    {
+      "interventions": [
+        {
+          "date": "2022-12-11T11:20:00.000Z",
+          "isCompleted": true,
+          "id": "1",
+          "name": "Fall risk assessment"
+        },
+        {
+          "date": "2022-12-11T11:20:00.000Z",
+          "isCompleted": true,
+          "id": "2",
+          "name": "Provide non-slip socks"
+        },
+        {
+          "id": "3",
+          "name": "Ensure call bell is within reach",
+          "isCompleted": false,
+          "date": "2022-12-11T11:20:00.000Z"
+        },
+        {
+          "isCompleted": false,
+          "name": "Instruct patient to ask for assistance before getting up",
+          "date": "2022-12-11T11:20:00.000Z",
+          "id": "4"
+        },
+        {
+          "id": "5",
+          "date": "2022-12-11T11:20:00.000Z",
+          "name": "Evaluate need for physical therapy",
+          "isCompleted": false
+        },
+        {
+          "id": "6",
+          "name": "Educate staff on monitoring for falls",
+          "date": "2022-12-11T11:20:00.000Z",
+          "isCompleted": false
+        }
+      ],
+      "id": "12",
+      "risk": "LOW",
+      "type": "Fall",
+      "topRiskFactors": [
+        "Previous history of falls",
+        "Confusion or altered mental status",
+        "Gait disturbances",
+        "Use of sedating medications",
+        "Postural hypotension"
+      ]
+    }
+  ],
+  "firstName": "Timothi",
+  "section": "Elective",
+  "admitted": "2022-12-07T00:00:00.000Z",
+  "risk": "LOW",
+  "documentId": "1vYEVYBg8WRWHL1PPqPh"
+}

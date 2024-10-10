@@ -1,0 +1,11 @@
+[{
+    "dismissedCards": [
+        "Sepsis",
+        "Fall"
+    ],
+    "settings": {
+        "showFishbone": true,
+        "showLowRisk": false,
+        "showVitals": true
+    }
+}]

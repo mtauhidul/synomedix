@@ -1,0 +1,94 @@
+.__wrapper {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 10px;
+  flex-wrap: nowrap;
+  gap: 10px;
+
+  .__patientInfo {
+    width: 45% !important;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+
+    @media screen and (min-width: 1072px) and (max-width: 1360px) {
+      width: 30%;
+    }
+
+    .__patient_identity {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+
+      .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+
+        background: var(--primary-color);
+      }
+    }
+
+    .__patient_details {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(48, 62, 101, 0.7);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
+      .dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(48, 62, 101, 0.2);
+      }
+    }
+
+    .admission {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(48, 62, 101, 0.7);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
+      .dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(48, 62, 101, 0.2);
+      }
+    }
+  }
+
+  .flags {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 990px) {
+      justify-content: flex-start;
+    }
+  }
+
+  .__diagram {
+    width: 60%;
+
+    @media screen and (min-width: 1072px) and (max-width: 1360px) {
+      width: 60%;
+    }
+  }
+}

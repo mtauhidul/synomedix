@@ -1,0 +1,130 @@
+._view {
+  ._patients_data {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    gap: 10px;
+
+    max-width: 500px;
+    margin-left: auto;
+
+    ._level {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      ._level__title {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        color: #333333;
+      }
+
+      ._level__value {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: rgba(51, 51, 51, 0.7);
+      }
+    }
+
+    ._bar {
+      width: 0px;
+      height: 20px;
+
+      border: 1px solid #000000;
+    }
+  }
+
+  .fishbone_wrapper {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: auto;
+
+    .CBC_fishbone {
+      width: 25%;
+      height: 100px;
+      background-image: url(../../../../assets/leftFishbone.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      padding: 5px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      .CBC_fishbone_item {
+        margin: calc(1vw + 5px);
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        text-align: center;
+        color: #707070;
+
+        @media screen and (min-width: 1500px) {
+          margin: 20px;
+        }
+      }
+    }
+
+    // Apply media query for greater than 1000px and less than 1360px
+    @media (min-width: 1000px) and (max-width: 1360px) {
+      .CBC_fishbone {
+        width: 16%;
+
+        .CBC_fishbone_item {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .BMP_fishbone {
+      width: 45%;
+      height: 100px;
+      background-image: url(../../../../assets/rightFishbone.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .BMP_fishbone_item_container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      height: calc(1vw + 50px);
+
+      @media screen and (min-width: 1180px) {
+        height: 80px !important;
+      }
+    }
+
+    .BMP_fishbone_item {
+      font-size: 15px;
+      text-align: right;
+      font-weight: 400;
+      line-height: 18px;
+      color: #707070;
+      margin: 0 10px;
+
+      @media screen and (min-width: 1080px) {
+        font-size: 16px !important;
+        margin: 0 15px;
+      }
+    }
+  }
+
+  // Apply media query for greater than 1000px and less than 1360px
+}
