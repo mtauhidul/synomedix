@@ -63,7 +63,7 @@ const PatientsProvider = ({ children }) => {
     setFilterOn((prev) => !prev);
     if (cat === "All") {
       if (cons.length === 0) {
-        setPatients(data);
+        setPatients(reservedData);
         if (sort === "risk_high_to_low") {
           const sortedByRiskHighToLow = data.sort((a, b) => {
             if (a.risk === "HIGH") return -1;
@@ -140,22 +140,22 @@ const PatientsProvider = ({ children }) => {
     setCons(conditions);
     if (conditions.length === 0) {
       if (category === "All") {
-        setPatients(data);
+        setPatients(reservedData);
       } else {
-        const filtered = allPatients.filter(
+        const filtered = reservedData.filter(
           (patient) => patient.risk === category
         );
         setPatients(filtered);
       }
     } else {
       if (category === "All") {
-        const filtered = allPatients.filter((patient) => {
+        const filtered = reservedData.filter((patient) => {
           const flags = patient.flags.map((flag) => flag.type);
           return conditions.every((condition) => flags.includes(condition));
         });
         setPatients(filtered);
       } else {
-        const filtered = allPatients.filter((patient) => {
+        const filtered = reservedData.filter((patient) => {
           const flags = patient.flags.map((flag) => flag.type);
 
           return conditions.every((condition) => flags.includes(condition));
