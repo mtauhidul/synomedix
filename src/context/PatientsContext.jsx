@@ -11,11 +11,20 @@ const PatientsProvider = ({ children }) => {
   const [category, setCategory] = React.useState("All");
   const [cons, setCons] = React.useState([]);
   const [sort, setSort] = React.useState("");
+  const [reservedData, setReservedData] = React.useState([]);
 
   React.useEffect(() => {
     setData(patients);
     setAllPatients(patients);
   }, [patients]);
+
+  React.useEffect(() => {
+    const localData = JSON.parse(sessionStorage.getItem("patients"));
+
+    if (localData) {
+      setReservedData(localData);
+    }
+  }, []);
 
   const toggleFilter = () => {
     setShowLowRisk((prev) => !prev);
@@ -162,10 +171,11 @@ const PatientsProvider = ({ children }) => {
 
   // This one is working for name and id search
   const filterByNameAndId = (name) => {
+    console.log(reservedData.length);
     if (name === "") {
-      setPatients(data);
+      setPatients(reservedData);
     } else {
-      const filtered = allPatients.filter((patient) => {
+      const filtered = reservedData.filter((patient) => {
         const fullName = `${patient.firstName} ${patient.lastName}`;
         const id = patient.id;
 
