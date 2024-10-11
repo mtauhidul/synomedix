@@ -15,7 +15,8 @@ const Header = () => {
   const [categoryName, setCategoryName] = useState("All");
 
   useEffect(() => {
-    const options = data.map((patient) =>
+    const reservedData = JSON.parse(sessionStorage.getItem("patients"));
+    const options = reservedData.map((patient) =>
       patient.flags?.map((flag) => flag.type)
     );
     const flatArray = options.flat();

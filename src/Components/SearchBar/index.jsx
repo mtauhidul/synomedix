@@ -2,7 +2,6 @@ import IconButton from "@mui/material/IconButton";
 import * as React from "react";
 
 import menuBar from "../../assets/burger-bar.png";
-import notificationIcon from "../../assets/Notification.svg";
 import refreshIcon from "../../assets/refresh.png";
 import searchIcon from "../../assets/Search.svg";
 import { usePatientsData } from "../../context/PatientsContext";
@@ -60,11 +59,6 @@ const SearchBar = () => {
         </div>
 
         <div className={styles.icons}>
-          <img
-            className={styles.notificationIcon}
-            src={notificationIcon}
-            alt="notification icon"
-          />
           <img
             className={styles.refreshIcon}
             src={refreshIcon}

@@ -51,12 +51,6 @@ const PatientsProvider = ({ children }) => {
     }
   }, []);
 
-  // This function is working for refresh Data
-  const refreshData = () => {
-    setPatients(data);
-    setShowLowRisk(true);
-  };
-
   // This function is working for category Search
   const filterByCategory = (cat) => {
     setCategory(cat);
@@ -303,6 +297,11 @@ const PatientsProvider = ({ children }) => {
     const index = temporaryPatients.findIndex((p) => p.id === patient.id);
     temporaryPatients[index] = patient;
     setPatients(temporaryPatients);
+  };
+
+  // This function is working for refresh Data
+  const refreshData = () => {
+    setPatients(reservedData);
   };
 
   return (
