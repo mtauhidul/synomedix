@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 // logo
 import DashboardIcon from "../../assets/dashboard.svg";
+import Logo from "../../assets/med.png";
 import SettingIcon from "../../assets/setting.svg";
-import Logo from "../../assets/synomedix.png";
 
 // styles
 import useWindowSize from "../../hooks/useWindowSize";
