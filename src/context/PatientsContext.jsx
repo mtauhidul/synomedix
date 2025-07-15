@@ -1,4 +1,5 @@
 import * as React from "react";
+import { getPatients } from "../services";
 
 export const PatientsContext = React.createContext();
 
@@ -14,16 +15,31 @@ const PatientsProvider = ({ children }) => {
   const [reservedData, setReservedData] = React.useState([]);
 
   React.useEffect(() => {
-    setData(patients);
-    setAllPatients(patients);
-  }, [patients]);
+    const fetchData = async () => {
+      try {
+        const localData = sessionStorage.getItem("patients");
 
-  React.useEffect(() => {
-    const localData = JSON.parse(sessionStorage.getItem("patients"));
+        if (localData) {
+          const parsedData = JSON.parse(localData);
+          setReservedData(parsedData);
+          setPatients(parsedData);
+          setData(parsedData);
+          setAllPatients(parsedData);
+        } else {
+          // Fetch data if not available in sessionStorage
+          const response = await getPatients();
+          sessionStorage.setItem("patients", JSON.stringify(response));
+          setReservedData(response);
+          setPatients(response);
+          setData(response);
+          setAllPatients(response);
+        }
+      } catch (error) {
+        console.error("Error fetching or parsing patients data:", error);
+      }
+    };
 
-    if (localData) {
-      setReservedData(localData);
-    }
+    fetchData();
   }, []);
 
   const toggleFilter = () => {
@@ -39,7 +55,7 @@ const PatientsProvider = ({ children }) => {
       const filtered = allPatients.filter((patient) => patient.risk !== "LOW");
       setPatients(filtered);
     }
-  }, [showLowRisk]);
+  }, [showLowRisk, allPatients]);
 
   // This Hook also works for the "Show Low Risk Patients" toggle button which is in the Setting page
   React.useEffect(() => {
@@ -286,11 +302,6 @@ const PatientsProvider = ({ children }) => {
       setPatients(sortedByAdmittedLowToHighArray);
     }
   };
-
-  React.useEffect(() => {
-    setPatients(data);
-    setAllPatients(data);
-  }, []);
 
   const updatePatientsData = (patient) => {
     const temporaryPatients = [...patients];

@@ -1,7 +1,3 @@
-import { Box, Button, CircularProgress } from "@mui/material";
-import Chip from "@mui/material/Chip";
-import Divider from "@mui/material/Divider";
-import Stack from "@mui/material/Stack";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CustomSnackbar from "../../../Components/CustomSnackbar/CustomSnackbar";
@@ -78,38 +74,46 @@ const ShortInfoCard = ({
     }
   };
 
+  const getRiskClass = (riskLevel) => {
+    const risk_lower = riskLevel?.toLowerCase();
+    if (risk_lower === "high" || risk_lower === "critical") return "high";
+    if (risk_lower === "medium" || risk_lower === "moderate") return "medium";
+    if (risk_lower === "low" || risk_lower === "mild") return "low";
+    return "medium";
+  };
+
+  const getBorderColor = (riskLevel) => {
+    const risk_lower = riskLevel?.toLowerCase();
+    if (risk_lower === "high" || risk_lower === "critical")
+      return "var(--critical-red)";
+    if (risk_lower === "medium" || risk_lower === "moderate")
+      return "var(--warning-amber)";
+    if (risk_lower === "low" || risk_lower === "mild")
+      return "var(--success-green)";
+    return "var(--warning-amber)";
+  };
+
+  const getRiskText = (riskLevel) => {
+    const risk_lower = riskLevel?.toLowerCase();
+    if (risk_lower === "high" || risk_lower === "critical") return "HIGH";
+    if (risk_lower === "medium" || risk_lower === "moderate") return "MED";
+    if (risk_lower === "low" || risk_lower === "mild") return "LOW";
+    return "MED";
+  };
+
   return (
     <>
       <Link
         onClick={toggleDrawer("left", false)}
         onKeyDown={toggleDrawer("left", false)}
         to={`/${id}`}
-        className={styles.__wrapper}
-        style={{
-          backgroundColor: location === id ? "#b8dadf4d" : "",
-          borderColor: location === id ? "var(--sidebar-bg)" : "#fff",
-        }}
+        className={`${styles.__wrapper} ${getRiskClass(risk)} ${
+          location === id ? styles.active : ""
+        }`}
       >
         <div className={styles.__condition}>
-          <h2
-            style={{
-              borderColor:
-                risk?.toLowerCase() === "high"
-                  ? "var(--high-border-color)"
-                  : risk?.toLowerCase() === "medium" ||
-                    risk?.toLowerCase() === "moderate"
-                  ? "var(--medium-border-color)"
-                  : "var(--low-border-color)",
-            }}
-          >
-            {risk?.toLowerCase() === "high"
-              ? "HIGH"
-              : risk?.toLowerCase() === "medium" ||
-                risk?.toLowerCase() === "moderate"
-              ? "MED"
-              : risk?.toLowerCase() === "low"
-              ? "LOW"
-              : ""}
+          <h2 style={{ borderColor: getBorderColor(risk) }}>
+            {getRiskText(risk)}
           </h2>
         </div>
 
@@ -127,20 +131,21 @@ const ShortInfoCard = ({
               {age} {sex}
             </h2>
             <div className={styles.dot} />
-            <Button
-              onClick={() => diagnose(id)}
-              variant="outlined"
-              size="small"
-              disabled={flags[0]?.topRiskFactors[0] !== "Test One"}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                diagnose(id);
+              }}
+              className={styles.diagnose__btn}
+              disabled={flags[0]?.topRiskFactors[0] !== "Test One" || loading}
             >
               {loading ? (
-                <Box sx={{ display: "flex" }}>
-                  <CircularProgress size="24px" />
-                </Box>
+                <div className={styles.loading__spinner}></div>
               ) : (
                 "Diagnose"
               )}
-            </Button>
+            </button>
           </div>
 
           <div className={styles.__patient_info}>
@@ -155,47 +160,21 @@ const ShortInfoCard = ({
             </h2>
           </div>
 
-          <Stack direction="row" spacing={1}>
-            {flags?.slice(0, 3)?.map(({ type, risk }, index) => (
-              <Chip
-                key={index}
-                label={`${type} (${risk.at(0)})`}
-                size="small"
-                variant="outlined"
-                sx={{
-                  textTransform: "uppercase",
-                  border: "1px solid var(--low-border-color)",
-                  color: "#303E65",
-                  fontWeight: "600",
-                  fontSize: "10px",
-                }}
-              />
+          <div className={styles.flags__container}>
+            {flags?.slice(0, 3)?.map(({ type, risk: flagRisk }, index) => (
+              <span key={index} className={styles.flag__chip}>
+                {type} ({flagRisk?.charAt(0)})
+              </span>
             ))}
-            {restRenderFlags?.length !== 0 && (
-              <Chip
-                label={`+${restRenderFlags?.length} FLAGS`}
-                size="small"
-                sx={{
-                  textTransform: "uppercase",
-                  border: "1px solid var(--low-border-color)",
-                  color: "#303E65",
-                  fontWeight: "600",
-                  fontSize: "10px",
-                }}
-                variant="outlined"
-              />
+            {restRenderFlags?.length > 0 && (
+              <span className={styles.more__flags}>
+                +{restRenderFlags?.length} FLAGS
+              </span>
             )}
-          </Stack>
+          </div>
         </div>
       </Link>
-      <Divider
-        sx={{
-          width: "85%",
-          height: "1px",
-          margin: "0 auto",
-          backgroundColor: "var(--primary-border-color)",
-        }}
-      />
+
       <CustomSnackbar
         message={message}
         open={snackbarOpen}

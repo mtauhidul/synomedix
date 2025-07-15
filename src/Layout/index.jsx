@@ -8,6 +8,8 @@ const Layout = ({ children }) => {
     <Box
       sx={{
         display: "flex",
+        height: "100vh",
+        overflow: "hidden",
       }}
     >
       <Sidebar />
@@ -16,6 +18,10 @@ const Layout = ({ children }) => {
         sx={{
           width: "100%",
           padding: "0 10px",
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          overflow: "hidden",
         }}
       >
         <SearchBar />
@@ -24,26 +30,28 @@ const Layout = ({ children }) => {
           sx={{
             display: "flex",
             alignItems: "stretch",
+            gap: "1rem",
+            flex: 1,
+            minHeight: 0,
+            overflow: "hidden",
           }}
         >
           <Patients />
 
           <Box
             sx={{
-              marginLeft: {
-                xs: 0,
-                lg: "1rem",
-              },
               backgroundColor: "#fff",
               flex: 1,
               padding: "1.5rem 1.5rem 0 1.5rem",
-              borderRadius: "5px",
+              borderRadius: "12px",
+              minWidth: 0,
+              overflow: "hidden",
+              height: "100%",
             }}
           >
             {children}
           </Box>
         </Box>
-        <Box />
       </Box>
     </Box>
   );

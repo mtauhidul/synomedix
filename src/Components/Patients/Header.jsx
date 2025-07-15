@@ -1,6 +1,5 @@
-import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import arrowDownIcon from "../../assets/arrow_down.svg";
 import arrowUpIcon from "../../assets/arrow_up.svg";
 import { usePatientsData } from "../../context/PatientsContext";
@@ -15,21 +14,43 @@ const Header = () => {
   const [categoryName, setCategoryName] = useState("All");
 
   useEffect(() => {
-    const reservedData = JSON.parse(sessionStorage.getItem("patients"));
-    const options = reservedData.map((patient) =>
-      patient.flags?.map((flag) => flag.type)
-    );
-    const flatArray = options.flat();
-    const uniqueOptions = [...new Set(flatArray)];
-    const selectedOptions = uniqueOptions.map((option) => ({
-      value: option,
-      checked: false,
-    }));
+    const patientsData = sessionStorage.getItem("patients");
+    if (!patientsData) return;
 
-    setSelectedOption(selectedOptions);
+    try {
+      const reservedData = JSON.parse(patientsData);
+      if (!reservedData || !Array.isArray(reservedData)) return;
+
+      const options = reservedData.map((patient) =>
+        patient.flags?.map((flag) => flag.type)
+      );
+      const flatArray = options.flat();
+      const uniqueOptions = [...new Set(flatArray)];
+      const selectedOptions = uniqueOptions.map((option) => ({
+        value: option,
+        checked: false,
+      }));
+
+      setSelectedOption(selectedOptions);
+    } catch (error) {
+      console.error("Error parsing patients data from sessionStorage:", error);
+    }
   }, []);
 
-  const risks = data?.map((patient) => patient.risk);
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setOpen(false);
+      setRiskOpen(false);
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const risks = data?.map((patient) => patient.risk) || [];
   const uniqueRisks = ["All", ...new Set(risks)];
 
   // It will filter the data based on the selected condition
@@ -58,98 +79,37 @@ const Header = () => {
 
   return (
     <>
-      <header onClick={() => {}} className={styles.__wrapper}>
-        <Box
-          sx={{
-            minWidth: 162,
-            border: "1px solid #e0e0e0",
-            borderRadius: "5px",
-            fontSize: "14px",
-            lineHeight: "17px",
-            color: "rgba(48, 62, 101, 0.7)",
-            padding: "3px 0",
-            paddingLeft: "5px",
-            fontWeight: "600",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            position: "relative",
+      <header className={styles.__wrapper}>
+        <div
+          className={`${styles.dropdown} ${styles.risk__dropdown} ${
+            riskOpen ? styles.active : ""
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen(false);
+            setRiskOpen((pre) => !pre);
           }}
         >
-          <span
-            style={{
-              flex: "1",
-              maxWidth: "75px",
-            }}
-          >
-            Risk Level
-          </span>{" "}
-          <div
-            style={{
-              flex: "1",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "12px",
-                fontWeight: "600",
-                color: "#000",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                cursor: "pointer",
-                textAlign: "center",
-                marginTop: "1px",
-              }}
-              onClick={() => {
-                setOpen(false);
-                setRiskOpen((pre) => !pre);
-              }}
-            >
-              {categoryName}
-              {riskOpen ? (
-                <img
-                  style={{
-                    height: "24px",
-                    width: "24px",
-                    marginRight: "5px",
-                  }}
-                  src={arrowUpIcon}
-                  alt="arrow down icon"
-                />
-              ) : (
-                <img
-                  style={{
-                    height: "24px",
-                    width: "24px",
-                    marginRight: "5px",
-                  }}
-                  src={arrowDownIcon}
-                  alt="arrow down icon"
-                />
-              )}
-            </span>
+          <span className={styles.dropdown__label}>Risk Level</span>
+          <div className={styles.dropdown__value}>
+            <span>{categoryName}</span>
           </div>
+          <img
+            className={`${styles.dropdown__arrow} ${riskOpen ? styles.up : ""}`}
+            src={riskOpen ? arrowUpIcon : arrowDownIcon}
+            alt="dropdown arrow"
+          />
           {riskOpen && (
-            <ul className={styles.list}>
+            <ul className={`${styles.list} ${styles["risk-list"]}`}>
               {uniqueRisks.map((value, idx) => {
                 return (
-                  <li
-                    key={idx}
-                    style={{
-                      cursor: "auto",
-                    }}
-                  >
+                  <li key={idx} onClick={(e) => e.stopPropagation()}>
                     <input
                       type="radio"
                       id={value}
-                      name={value}
+                      name="riskLevel"
                       value={value}
                       checked={categoryName === value}
-                      style={{
-                        margin: "0",
-                        padding: "3px 3px 0px 5px !important",
-                      }}
                       onChange={(e) => {
                         setOpen(false);
                         filterByCategory(e.target.value);
@@ -157,14 +117,7 @@ const Header = () => {
                         setRiskOpen(false);
                       }}
                     />
-                    <label
-                      style={{
-                        paddingTop: "1px",
-                        paddingLeft: "6px",
-                      }}
-                      htmlFor={value}
-                      className={styles.label}
-                    >
+                    <label htmlFor={value} className={styles.label}>
                       {value}
                     </label>
                   </li>
@@ -172,117 +125,52 @@ const Header = () => {
               })}
             </ul>
           )}
-        </Box>
-        <Box
-          onClick={() => {
+        </div>
+
+        <div
+          className={`${styles.dropdown} ${styles.condition__dropdown} ${
+            open ? styles.active : ""
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
             setRiskOpen(false);
-          }}
-          sx={{
-            minWidth: 190,
-            border: "1px solid #e0e0e0",
-            borderRadius: "5px",
-            fontSize: "14px",
-            lineHeight: "17px",
-            color: "rgba(48, 62, 101, 0.7)",
-            padding: "3px 0",
-            paddingLeft: "5px",
-            fontWeight: "600",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            position: "relative",
+            setOpen((pre) => !pre);
           }}
         >
-          <span
-            style={{
-              flex: "1",
-              maxWidth: "70px",
-            }}
-          >
-            Condition
-          </span>{" "}
-          <div
-            style={{
-              flex: "1",
-            }}
-            onClick={() => setOpen((pre) => !pre)}
-          >
-            <span
-              style={{
-                fontSize: "12px",
-                fontWeight: "600",
-                color: "#000",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                cursor: "pointer",
-                textAlign: "center",
-                marginTop: "1px",
-              }}
-            >
+          <span className={styles.dropdown__label}>Condition</span>
+          <div className={styles.dropdown__value}>
+            <span>
               {selectedOption.filter((option) => option.checked).length === 0
                 ? "All"
-                : selectedOption && (
-                    <>
-                      {selectedOption
-                        .filter((option) => option.checked)
-                        .map((option) => option.value.slice(0, 2))
-                        .join(", ")}
-                    </>
-                  )}
-              {open ? (
-                <img
-                  onClick={() => setOpen(true)}
-                  style={{
-                    height: "24px",
-                    width: "24px",
-                    marginRight: "5px",
-                  }}
-                  src={arrowUpIcon}
-                  alt="arrow down icon"
-                />
-              ) : (
-                <img
-                  onClick={() => setOpen(false)}
-                  style={{
-                    height: "24px",
-                    width: "24px",
-
-                    marginRight: "5px",
-                  }}
-                  src={arrowDownIcon}
-                  alt="arrow down icon"
-                />
-              )}
+                : selectedOption.filter((option) => option.checked).length > 2
+                ? `${
+                    selectedOption.filter((option) => option.checked).length
+                  } Selected`
+                : selectedOption
+                    .filter((option) => option.checked)
+                    .map((option) => option.value.slice(0, 8))
+                    .join(", ")}
             </span>
           </div>
+          <img
+            className={`${styles.dropdown__arrow} ${open ? styles.up : ""}`}
+            src={open ? arrowUpIcon : arrowDownIcon}
+            alt="dropdown arrow"
+          />
           {open && (
-            <ul className={styles.list}>
+            <ul className={`${styles.list} ${styles["condition-list"]}`}>
               {selectedOption.map(({ value, checked }, idx) => {
                 return (
-                  <li
-                    key={idx}
-                    style={{
-                      cursor: "auto",
-                    }}
-                  >
+                  <li key={idx} onClick={(e) => e.stopPropagation()}>
                     <input
                       type="checkbox"
                       id={`condition_${idx}`}
-                      name={idx}
+                      name={`condition_${idx}`}
                       value={value}
                       checked={checked}
                       onChange={handleSelect}
-                      style={{
-                        margin: "0",
-                        padding: "3px 3px 3px 4px !important",
-                      }}
                     />
                     <label
-                      style={{
-                        paddingTop: "1px",
-                        paddingLeft: "6px",
-                      }}
                       htmlFor={`condition_${idx}`}
                       className={styles.label}
                     >
@@ -293,7 +181,7 @@ const Header = () => {
               })}
             </ul>
           )}
-        </Box>
+        </div>
       </header>
       <Divider />
     </>

@@ -2,9 +2,10 @@ import * as React from "react";
 // material ui
 import Box from "@mui/material/Box";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // logo
+import DashboardIcon from "../../assets/dashboard.svg";
 import SettingIcon from "../../assets/setting.svg";
 import Logo from "../../assets/synomedix.png";
 
@@ -14,12 +15,6 @@ import styles from "./Sidebar.module.scss";
 
 const Sidebar = () => {
   const { height } = useWindowSize();
-
-  const navigate = useNavigate();
-
-  const goBack = () => {
-    navigate("/");
-  };
 
   React.useEffect(() => {}, []);
 
@@ -42,14 +37,9 @@ const Sidebar = () => {
         />
       </Link>
 
-      {/* <HomeRoundedIcon
-        sx={{
-          fontSize: "2.5rem",
-          color: "#fff",
-          cursor: "pointer",
-        }}
-        onClick={goBack}
-      /> */}
+      <Link to="/dashboard">
+        <img src={DashboardIcon} alt="dashboard" />
+      </Link>
 
       <Link to="/setting">
         <img src={SettingIcon} alt="setting" />

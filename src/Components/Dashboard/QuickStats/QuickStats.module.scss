@@ -1,0 +1,49 @@
+.__wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.__stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  flex: 1;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.__icon {
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.__content {
+  flex: 1;
+}
+
+.__value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.__label {
+  font-size: 0.875rem;
+  color: #6c757d;
+  font-weight: 600;
+}

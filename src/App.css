@@ -1,21 +1,107 @@
 :root {
-  --primary-bg: #f2f7ff;
-  /* --sidebar-bg: #266df9; */
-  --sidebar-bg: #06102e;
-  --selected-bg: #f8fbff;
-  /* --selected-bg: #b8dadf4d; */
+  /* Medical ICU/NICU Color Scheme */
+  --primary-bg: #f8fafb;
+  --secondary-bg: #ffffff;
+  --sidebar-bg: #1a2332;
+  --sidebar-hover: #2a3441;
+  --selected-bg: #e8f4f8;
 
-  --primary-border-color: #dae5ff;
-  --high-border-color: #eaa7b3;
-  --low-border-color: #99b5de;
-  --medium-border-color: #edc486;
+  /* Medical Status Colors */
+  --critical-red: #dc2626;
+  --warning-amber: #f59e0b;
+  --success-green: #059669;
+  --info-blue: #0ea5e9;
+  --neutral-gray: #6b7280;
 
-  --primary-color: #303e65;
+  /* Border Colors */
+  --primary-border-color: #e5e7eb;
+  --high-border-color: #fecaca;
+  --medium-border-color: #fed7aa;
+  --low-border-color: #bbf7d0;
+
+  /* Text Colors */
+  --primary-color: #1f2937;
+  --secondary-color: #4b5563;
+  --text-secondary: #6b7280;
+  --primary-text: #111827;
+  --text-color: #374151;
+  --muted-color: #9ca3af;
+
+  /* ICU Specific Colors */
+  --icu-primary: #0f172a;
+  --icu-accent: #0ea5e9;
+  --icu-alert: #ef4444;
+  --icu-warning: #f59e0b;
+  --icu-success: #10b981;
+
+  /* Card Shadows */
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --card-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .App {
-  background-color: var(--primary-bg);
+  background: linear-gradient(135deg, var(--primary-bg) 0%, #f1f5f9 100%);
   box-sizing: border-box;
+  min-height: 100vh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    sans-serif;
+}
+
+/* Medical UI Enhancements */
+.medical-card {
+  background: var(--secondary-bg);
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease-in-out;
+}
+
+.medical-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.status-high {
+  background-color: var(--critical-red);
+}
+.status-medium {
+  background-color: var(--warning-amber);
+}
+.status-low {
+  background-color: var(--success-green);
+}
+
+/* ICU Monitor-style Typography */
+.monitor-text {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Pulse Animation for Critical Alerts */
+@keyframes pulse-critical {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.pulse-critical {
+  animation: pulse-critical 2s infinite;
 }
 
 select:focus {

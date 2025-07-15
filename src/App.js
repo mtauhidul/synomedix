@@ -1,10 +1,11 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Layout from "./Layout";
-import Home from "./Pages/Home";
 import useWindowSize from "./hooks/useWindowSize";
-import Setting from "./Pages/Setting";
+import Layout from "./Layout";
 import SettingLayout from "./Layout/SettingLayout";
+import Dashboard from "./Pages/Dashboard";
+import Home from "./Pages/Home";
+import Setting from "./Pages/Setting";
 
 function App() {
   const { height } = useWindowSize();
@@ -30,6 +31,15 @@ function App() {
           element={
             <Layout>
               <Home />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <Layout>
+              <Dashboard />
             </Layout>
           }
         />

@@ -1,18 +1,41 @@
 .__wrapper {
   box-sizing: border-box;
+  background: var(--primary-bg);
+  min-height: 100vh;
 
   .__list {
-
     display: flex;
     flex-direction: row !important;
     justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
     column-gap: 20px;
+    row-gap: 16px;
+    padding: 20px;
 
     overflow-y: auto;
     height: calc(100vh - 319px);
     padding-bottom: 20px;
+
+    // Custom scrollbar for medical interface
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--icu-accent);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--icu-primary);
+      }
+    }
 
     @media (min-width: 1024px) {
       height: calc(100vh - 275px);
@@ -33,7 +56,5 @@
     @media (min-width: 1920px) {
       height: calc(100vh - 275px);
     }
-
-
   }
 }

@@ -1,37 +1,225 @@
 .__wrapper {
-  background-color: #fff;
-  padding: 25px 20px;
+  background: linear-gradient(
+    135deg,
+    var(--secondary-bg) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  border: 1px solid var(--primary-border-color);
+  border-radius: 12px 12px 0 0;
+  padding: 16px 20px;
   box-sizing: border-box;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: visible;
+  z-index: 100;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--icu-accent), var(--icu-primary));
+    border-radius: 12px 12px 0 0;
+  }
+
+  .dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 180px;
+    max-width: 220px;
+    border: 1px solid var(--primary-border-color);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: visible;
+    z-index: 10;
+    user-select: none;
+
+    &:hover {
+      border-color: var(--icu-accent);
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-1px);
+    }
+
+    &.active {
+      border-color: var(--icu-accent);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+      background: rgba(255, 255, 255, 1);
+      z-index: 1001;
+    }
+
+    .dropdown__label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      width: 70px;
+      white-space: nowrap;
+    }
+
+    .dropdown__value {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--icu-primary);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1;
+      text-align: right;
+      margin-right: 8px;
+      min-width: 0;
+      overflow: hidden;
+      pointer-events: none; // Prevent double clicking
+
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .dropdown__arrow {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+      filter: invert(29%) sepia(89%) saturate(2400%) hue-rotate(212deg)
+        brightness(95%) contrast(95%);
+      flex-shrink: 0;
+      pointer-events: none; // Prevent double clicking
+
+      &.up {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .risk__dropdown {
+    min-width: 150px;
+    max-width: 180px;
+  }
+
+  .condition__dropdown {
+    min-width: 180px;
+    max-width: 250px;
+
+    .dropdown__value span {
+      max-width: 120px;
+    }
+
+    .list {
+      right: 0;
+      left: auto;
+      width: auto;
+      min-width: 200px;
+      max-width: 300px;
+    }
+  }
 
   .list {
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
     position: absolute;
-    top: 33px;
+    top: calc(100% + 4px);
+    left: 0;
     right: 0;
     width: 100%;
-    padding: 5px;
+    padding: 8px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-top: none;
-    border-radius: 0 0 5px 5px;
-    padding-left: 7px;
+    border: 1px solid var(--primary-border-color);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 1002;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: dropdownFadeIn 0.2s ease-out;
+
+    @keyframes dropdownFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    // Ensure dropdown doesn't go outside container bounds
+    &.risk-list {
+      min-width: 150px;
+    }
+
+    &.condition-list {
+      right: auto;
+      left: auto;
+      right: 0;
+      width: auto;
+      min-width: 200px;
+      max-width: 280px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--icu-accent);
+      border-radius: 2px;
+    }
 
     li {
-      margin-top: 7px;
+      margin-bottom: 2px;
       cursor: pointer;
       display: flex;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
 
       &:hover {
-        background-color: #eee;
+        background: rgba(14, 165, 233, 0.08);
+        transform: translateX(2px);
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin: 0 8px 0 0;
+        accent-color: var(--icu-accent);
+        transform: scale(1.1);
       }
 
       .label {
         display: block;
         width: 100%;
+        font-size: 12px;
+        color: var(--text-color);
+        font-weight: 600;
+        cursor: pointer;
+        letter-spacing: 0.3px;
       }
     }
   }

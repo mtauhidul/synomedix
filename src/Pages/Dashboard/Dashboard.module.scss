@@ -1,0 +1,526 @@
+.__wrapper {
+  height: 100%;
+  overflow-y: auto;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+.__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 16px;
+}
+
+.__loadingSpinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #0ea5e9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.__loadingText {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+}
+
+.__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.__titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.__title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.__subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+}
+
+.__timestamp {
+  font-size: 12px;
+  color: #94a3b8;
+  background: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  font-weight: 500;
+}
+
+/* KPI Cards Grid */
+.__kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.__kpiCard {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.__kpiCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.__kpiCard.__critical {
+  border-left: 4px solid #ef4444;
+}
+
+.__kpiCard.__critical .__kpiValue {
+  color: #dc2626;
+}
+
+.__kpiCard.__flagged {
+  border-left: 4px solid #f59e0b;
+}
+
+.__kpiCard.__flagged .__kpiValue {
+  color: #d97706;
+}
+
+.__kpiHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.__kpiHeader h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.__kpiIcon {
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+.__kpiValue {
+  font-size: 36px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  line-height: 1;
+}
+
+.__kpiSubtext {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Analytics Grid */
+.__analyticsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.__chartCard {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.__chartCard.__fullWidth {
+  grid-column: 1 / -1;
+}
+
+.__chartHeader {
+  margin-bottom: 20px;
+}
+
+.__chartHeader h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.__chartSubtext {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Risk Distribution Chart */
+.__riskChart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.__riskItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.__riskBar {
+  height: 8px;
+  border-radius: 4px;
+  min-width: 4px;
+  transition: width 0.6s ease;
+}
+
+.__riskBar.__high {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.__riskBar.__medium {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.__riskBar.__low {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.__riskLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.__riskName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.__riskCount {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Department Overview */
+.__departmentList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.__departmentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.__departmentItem:last-child {
+  border-bottom: none;
+}
+
+.__departmentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.__departmentName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.__departmentCount {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.__departmentMetrics {
+  text-align: right;
+}
+
+.__criticalCount {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.__criticalCount.__hasCritical {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* Flag Types */
+.__flagGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.__flagItem {
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.__flagHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.__flagType {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.__flagCount {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.__flagBar {
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.__flagProgress {
+  height: 100%;
+  background: linear-gradient(90deg, #0ea5e9, #0284c7);
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+/* Admission Trends Chart */
+.__admissionChart {
+  height: 200px;
+  position: relative;
+}
+
+.__trendLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: end;
+  gap: 8px;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.__trendBar {
+  flex: 1;
+  background: linear-gradient(180deg, #0ea5e9, #0284c7);
+  border-radius: 4px 4px 0 0;
+  min-height: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.__trendBar:hover {
+  background: linear-gradient(180deg, #0284c7, #0369a1);
+  transform: scaleY(1.05);
+}
+
+.__trendLabel {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.__trendValue {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #0f172a;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.__trendBar:hover .__trendValue {
+  opacity: 1;
+}
+
+/* Vital Signs Chart */
+.__vitalChart {
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.__vitalItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.__vitalIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.__vitalIcon.__heartRate {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.__vitalIcon.__bloodPressure {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.__vitalIcon.__temperature {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.__vitalIcon.__oxygen {
+  background: rgba(14, 165, 233, 0.1);
+  color: #0284c7;
+}
+
+.__vitalInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.__vitalName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.__vitalRange {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.__vitalMetrics {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.__vitalAverage {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.__vitalStatus {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.__vitalStatus.__normal {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.__vitalStatus.__warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.__vitalStatus.__critical {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .__wrapper {
+    padding: 16px;
+  }
+
+  .__header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .__kpiGrid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .__analyticsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .__flagGrid {
+    grid-template-columns: 1fr;
+  }
+}
