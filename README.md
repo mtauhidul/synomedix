@@ -23,7 +23,7 @@ SynoMedix is a research-focused, AI-powered web app that simulates ICU/NICU/CCU 
 
 ## 🚀 Try It Now
 
-👉 [Visit SynoMedix](https://www.synomedix.com)  
+👉 [Visit SynoMedix]([https://www.synomedix.vercel.app](https://synomedix.vercel.app))  
 _(No login required — explore real-time AI suggestions with mock data)_
 
 ---
