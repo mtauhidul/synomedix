@@ -21,13 +21,14 @@ const Setting = () => {
 
   const { toggleView, state } = useFishbone();
   const { toggleVitalView, vitalState } = useVital();
-  const { toggleFilter, showLowRisk } = usePatientsData();
+  const { toggleFilter, showLowRisk, refreshPatients } = usePatientsData();
   const [loading, setLoading] = React.useState(false);
 
   const resetAllData = async () => {
     setLoading(true);
     const response = await resetData();
     if (response) {
+      await refreshPatients();
       setLoading(false);
       showSnackbar("Data reset successfully");
 

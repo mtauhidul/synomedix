@@ -315,6 +315,16 @@ const PatientsProvider = ({ children }) => {
     setPatients(reservedData);
   };
 
+  const refreshPatients = async () => {
+    sessionStorage.removeItem("patients");
+    const response = await getPatients();
+    sessionStorage.setItem("patients", JSON.stringify(response));
+    setReservedData(response);
+    setPatients(response);
+    setData(response);
+    setAllPatients(response);
+  };
+
   return (
     <PatientsContext.Provider
       value={{
@@ -332,6 +342,7 @@ const PatientsProvider = ({ children }) => {
         filterOn,
         toggleFilter,
         showLowRisk,
+        refreshPatients,
       }}
     >
       {children}

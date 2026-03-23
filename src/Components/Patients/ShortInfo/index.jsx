@@ -51,8 +51,7 @@ const ShortInfoCard = ({
 
         if (updatedPatient) {
           showSnackbar("Patient diagnosed successfully");
-          updatePatientsData(updatedPatient);
-          // console.log("Patient updated successfully");
+          updatePatientsData({ ...updatedPatient, id });
         }
       }
 
@@ -131,21 +130,32 @@ const ShortInfoCard = ({
               {age} {sex}
             </h2>
             <div className={styles.dot} />
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                diagnose(id);
-              }}
-              className={styles.diagnose__btn}
-              disabled={flags[0]?.topRiskFactors[0] !== "Test One" || loading}
+            <span
+              className={styles.diagnose__tooltip_wrapper}
+              data-tooltip={
+                loading
+                  ? "Running AI diagnosis..."
+                  : flags[0]?.topRiskFactors[0] !== "Test One"
+                  ? "Already diagnosed"
+                  : "Click to run AI diagnosis"
+              }
             >
-              {loading ? (
-                <div className={styles.loading__spinner}></div>
-              ) : (
-                "Diagnose"
-              )}
-            </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  diagnose(id);
+                }}
+                className={styles.diagnose__btn}
+                disabled={flags[0]?.topRiskFactors[0] !== "Test One" || loading}
+              >
+                {loading ? (
+                  <div className={styles.loading__spinner}></div>
+                ) : (
+                  "Diagnose"
+                )}
+              </button>
+            </span>
           </div>
 
           <div className={styles.__patient_info}>
