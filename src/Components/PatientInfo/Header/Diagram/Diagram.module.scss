@@ -1,52 +1,63 @@
 ._view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
   ._patients_data {
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-wrap: nowrap;
-    gap: 10px;
-
-    max-width: 500px;
-    margin-left: auto;
+    gap: 6px;
+    background: var(--secondary-bg);
+    border: 1px solid var(--primary-border-color);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
 
     ._level {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
 
       ._level__title {
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
-        color: #333333;
+        font-weight: 700;
+        font-size: 10px;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        line-height: 1;
       }
 
       ._level__value {
-        font-family: "Inter";
+        font-family: "JetBrains Mono", "Monaco", monospace;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         font-size: 14px;
-        line-height: 17px;
-        color: rgba(51, 51, 51, 0.7);
+        line-height: 1;
+        color: var(--primary-color);
+        white-space: nowrap;
       }
     }
 
     ._bar {
-      width: 0px;
-      height: 20px;
-
-      border: 1px solid #000000;
+      width: 1px;
+      height: 32px;
+      background: var(--primary-border-color);
     }
   }
 
   .fishbone_wrapper {
     width: 100%;
-    max-width: 500px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    margin-left: auto;
+    background: var(--secondary-bg);
+    border: 1px solid var(--primary-border-color);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
 
     .CBC_fishbone {
       width: 25%;
@@ -62,27 +73,24 @@
       justify-content: center;
 
       .CBC_fishbone_item {
-        margin: calc(1vw + 5px);
-        font-weight: 400;
-        font-size: 15px;
+        margin: calc(1vw + 4px);
+        font-weight: 600;
+        font-size: 14px;
         line-height: 18px;
         text-align: center;
-        color: #707070;
+        color: var(--secondary-color);
+        font-family: "JetBrains Mono", monospace;
 
         @media screen and (min-width: 1500px) {
-          margin: 20px;
+          margin: 18px;
         }
       }
     }
 
-    // Apply media query for greater than 1000px and less than 1360px
     @media (min-width: 1000px) and (max-width: 1360px) {
       .CBC_fishbone {
         width: 16%;
-
-        .CBC_fishbone_item {
-          font-size: 16px;
-        }
+        .CBC_fishbone_item { font-size: 13px; }
       }
     }
 
@@ -112,19 +120,18 @@
     }
 
     .BMP_fishbone_item {
-      font-size: 15px;
+      font-size: 14px;
       text-align: right;
-      font-weight: 400;
+      font-weight: 600;
       line-height: 18px;
-      color: #707070;
+      color: var(--secondary-color);
       margin: 0 10px;
+      font-family: "JetBrains Mono", monospace;
 
       @media screen and (min-width: 1080px) {
-        font-size: 16px !important;
-        margin: 0 15px;
+        font-size: 14px !important;
+        margin: 0 12px;
       }
     }
   }
-
-  // Apply media query for greater than 1000px and less than 1360px
 }

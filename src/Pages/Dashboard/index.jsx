@@ -223,62 +223,63 @@ const Dashboard = () => {
           </div>
           <div className={styles.__riskChart}>
             <div className={styles.__riskItem}>
-              <div
-                className={`${styles.__riskBar} ${styles.__high}`}
-                style={{
-                  width: `${
-                    metrics.totalPatients > 0
-                      ? (metrics.riskDistribution.high /
-                          metrics.totalPatients) *
-                        100
-                      : 0
-                  }%`,
-                }}
-              ></div>
               <div className={styles.__riskLabel}>
                 <span className={styles.__riskName}>High Risk</span>
                 <span className={styles.__riskCount}>
                   {metrics.riskDistribution.high}
                 </span>
               </div>
+              <div className={styles.__riskTrack}>
+                <div
+                  className={`${styles.__riskBar} ${styles.__high}`}
+                  style={{
+                    width: `${
+                      metrics.totalPatients > 0
+                        ? (metrics.riskDistribution.high / metrics.totalPatients) * 100
+                        : 0
+                    }%`,
+                  }}
+                />
+              </div>
             </div>
             <div className={styles.__riskItem}>
-              <div
-                className={`${styles.__riskBar} ${styles.__medium}`}
-                style={{
-                  width: `${
-                    metrics.totalPatients > 0
-                      ? (metrics.riskDistribution.medium /
-                          metrics.totalPatients) *
-                        100
-                      : 0
-                  }%`,
-                }}
-              ></div>
               <div className={styles.__riskLabel}>
                 <span className={styles.__riskName}>Medium Risk</span>
                 <span className={styles.__riskCount}>
                   {metrics.riskDistribution.medium}
                 </span>
               </div>
+              <div className={styles.__riskTrack}>
+                <div
+                  className={`${styles.__riskBar} ${styles.__medium}`}
+                  style={{
+                    width: `${
+                      metrics.totalPatients > 0
+                        ? (metrics.riskDistribution.medium / metrics.totalPatients) * 100
+                        : 0
+                    }%`,
+                  }}
+                />
+              </div>
             </div>
             <div className={styles.__riskItem}>
-              <div
-                className={`${styles.__riskBar} ${styles.__low}`}
-                style={{
-                  width: `${
-                    metrics.totalPatients > 0
-                      ? (metrics.riskDistribution.low / metrics.totalPatients) *
-                        100
-                      : 0
-                  }%`,
-                }}
-              ></div>
               <div className={styles.__riskLabel}>
                 <span className={styles.__riskName}>Low Risk</span>
                 <span className={styles.__riskCount}>
                   {metrics.riskDistribution.low}
                 </span>
+              </div>
+              <div className={styles.__riskTrack}>
+                <div
+                  className={`${styles.__riskBar} ${styles.__low}`}
+                  style={{
+                    width: `${
+                      metrics.totalPatients > 0
+                        ? (metrics.riskDistribution.low / metrics.totalPatients) * 100
+                        : 0
+                    }%`,
+                  }}
+                />
               </div>
             </div>
           </div>

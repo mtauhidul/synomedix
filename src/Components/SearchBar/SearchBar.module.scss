@@ -1,27 +1,28 @@
 .__wrapper {
-  margin: 25px 0 20px 0;
-  padding: 16px 20px;
-  border-radius: 12px;
-  background: var(--secondary-bg);
-  border: 1px solid var(--primary-border-color);
-  box-shadow: var(--card-shadow);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  backdrop-filter: blur(10px);
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--secondary-bg);
+  border-bottom: 1px solid var(--primary-border-color);
+  box-shadow: var(--shadow-xs);
+  flex-shrink: 0;
+  min-height: 60px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
 
   .leftSide {
-    width: 360px; // Fixed width to match patients list
-    border-right: 2px solid rgba(14, 165, 233, 0.1);
-    flex-shrink: 0;
-
-    @media screen and (max-width: 1360px) {
-      border-right: none;
-      width: auto;
-    }
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
 
     .menuBtn {
       display: none;
+      flex-shrink: 0;
 
       @media screen and (max-width: 1360px) {
         display: block;
@@ -30,45 +31,54 @@
       .menuBar {
         height: 18px;
         width: 18px;
-        filter: invert(29%) sepia(89%) saturate(2400%) hue-rotate(212deg)
-          brightness(95%) contrast(95%);
+        filter: invert(25%) sepia(60%) saturate(600%) hue-rotate(195deg) brightness(90%);
       }
     }
 
     .searchBar {
-      padding: 8px 12px;
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-right: 20px;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(14, 165, 233, 0.15);
-      border-radius: 8px;
-      transition: all 0.3s ease;
+      padding: 7px 12px;
+      background: var(--panel-bg);
+      border: 1px solid var(--primary-border-color);
+      border-radius: var(--radius-md);
+      min-width: 200px;
+      max-width: 300px;
+      transition: all 0.2s ease;
 
       &:focus-within {
         border-color: var(--icu-accent);
-        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(29, 111, 164, 0.1);
+      }
+
+      .searchIcon {
+        width: 15px;
+        height: 15px;
+        opacity: 0.45;
+        flex-shrink: 0;
+      }
+
+      .searchInput {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 13px;
+        color: var(--text-color);
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        min-width: 0;
+
+        &::placeholder {
+          color: var(--text-muted);
+          font-weight: 400;
+        }
       }
 
       @media screen and (max-width: 1360px) {
         display: none;
-      }
-
-      .searchInput {
-        width: 100%;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        padding: 6px;
-        font-size: 14px;
-        color: var(--text-color);
-        font-family: "Inter", sans-serif;
-
-        &:focus {
-          outline: none;
-          border: none;
-        }
       }
     }
   }
@@ -76,43 +86,97 @@
   .rightSide {
     display: flex;
     align-items: center;
-    flex: 1;
-    padding: 5px 10px;
-    justify-content: space-between;
+    gap: 8px;
+    flex-shrink: 0;
 
-    .icons {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: flex-end;
+    .sortSelect {
+      appearance: none;
+      border: 1px solid var(--primary-border-color);
+      border-radius: var(--radius-md);
+      background: var(--panel-bg);
+      padding: 7px 12px;
+      font-size: 13px;
+      color: var(--secondary-color);
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+      min-width: 148px;
+      transition: all 0.2s ease;
 
-      .notificationIcon {
-        padding-right: 15px;
-        border-right: 2px solid #dae5ff;
-        cursor: pointer;
+      &:hover {
+        border-color: var(--icu-accent);
+        background: #fff;
       }
 
+      &:focus {
+        border-color: var(--icu-accent);
+        box-shadow: 0 0 0 3px rgba(29, 111, 164, 0.1);
+        outline: none;
+      }
+    }
+
+    .divider {
+      width: 1px;
+      height: 24px;
+      background: var(--primary-border-color);
+      margin: 0 2px;
+    }
+
+    .refreshBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--primary-border-color);
+      background: var(--panel-bg);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+
       .refreshIcon {
-        padding-left: 15px;
-        cursor: pointer;
+        width: 15px;
+        height: 15px;
+        opacity: 0.55;
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        background: var(--selected-bg);
+        border-color: var(--icu-accent);
+
+        .refreshIcon {
+          opacity: 0.9;
+          transform: rotate(180deg);
+        }
       }
     }
   }
 }
 
-.sortSelect {
-  width: 100%;
-  max-width: 150px;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  padding: 5px;
-  font-size: 14px;
-  color: #757575;
-  margin-left: 15px;
+// System status bar at the bottom of searchbar
+.statusBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
 
-  &:focus {
-    outline: none;
-    border: none;
+  .statusDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--icu-success);
+    box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+    flex-shrink: 0;
+    animation: blink 3s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
   }
 }

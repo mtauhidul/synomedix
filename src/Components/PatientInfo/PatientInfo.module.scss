@@ -1,60 +1,32 @@
 .__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: 18px;
   box-sizing: border-box;
-  background: var(--primary-bg);
-  min-height: 100vh;
+  background: var(--panel-bg);
 
   .__list {
     display: flex;
-    flex-direction: row !important;
-    justify-content: flex-start;
-    align-content: flex-start;
+    flex-direction: row;
     flex-wrap: wrap;
-    column-gap: 20px;
-    row-gap: 16px;
-    padding: 20px;
-
+    gap: 14px;
     overflow-y: auto;
-    height: calc(100vh - 319px);
-    padding-bottom: 20px;
+    flex: 1;
+    min-height: 0;
+    padding-bottom: 16px;
+    align-content: flex-start;
 
-    // Custom scrollbar for medical interface
     &::-webkit-scrollbar {
-      width: 8px;
+      width: 5px;
     }
-
-    &::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-    }
-
     &::-webkit-scrollbar-thumb {
-      background: var(--icu-accent);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-
+      background: var(--primary-border-color);
+      border-radius: 3px;
       &:hover {
-        background: var(--icu-primary);
+        background: var(--icu-accent);
       }
-    }
-
-    @media (min-width: 1024px) {
-      height: calc(100vh - 275px);
-    }
-
-    @media (min-width: 1366px) {
-      height: calc(100vh - 318px);
-    }
-
-    @media (min-width: 1440px) {
-      height: calc(100vh - 317px);
-    }
-
-    @media (min-width: 1680px) {
-      height: calc(100vh - 275px);
-    }
-
-    @media (min-width: 1920px) {
-      height: calc(100vh - 275px);
     }
   }
 }

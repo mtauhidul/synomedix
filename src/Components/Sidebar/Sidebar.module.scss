@@ -1,86 +1,143 @@
 .__wrapper {
-  background: linear-gradient(180deg, var(--sidebar-bg) 0%, #0f1729 100%);
+  background: var(--icu-primary);
   min-height: 100vh;
-  width: 90px;
-  padding: 30px 0 20px 0;
+  width: 72px;
   height: 100%;
   position: relative;
-  border-right: 2px solid #334155;
-  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
-
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: var(--sidebar-shadow);
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 40px;
+  padding: 20px 0 24px;
+  gap: 6px;
   box-sizing: border-box;
+  z-index: 10;
+  flex-shrink: 0;
 
-  &::before {
+  // Top accent stripe
+  &::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(
-      90deg,
-      var(--icu-accent) 0%,
-      var(--icu-success) 50%,
-      var(--icu-accent) 100%
-    );
+    height: 3px;
+    background: linear-gradient(90deg, var(--icu-accent) 0%, var(--icu-teal) 100%);
   }
 
-  a {
+  // Logo container
+  .logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.1);
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
-      border-color: var(--icu-accent);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
+    margin-bottom: 16px;
+    transition: all 0.25s ease;
 
     img {
-      width: 24px;
-      height: 24px;
-      // filter: brightness(0) invert(1);
-      transition: all 0.3s ease;
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
     }
 
-    &:hover img {
-      filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.8));
+    &:hover {
+      background: rgba(29, 111, 164, 0.25);
+      border-color: rgba(29, 111, 164, 0.5);
+      box-shadow: 0 4px 16px rgba(29, 111, 164, 0.2);
     }
   }
 
-  // Logo styling
-  a:first-child {
-    width: 60px;
-    height: 60px;
-    // background: var(--icu-accent);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-
-    &:hover {
-      // background: #0284c7;
-      box-shadow: 0 8px 30px rgba(14, 165, 233, 0.4);
-    }
+  // Nav items
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 52px;
+    padding: 8px 4px;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    position: relative;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.45);
+    border: 1px solid transparent;
 
     img {
-      width: 35px;
-      height: 35px;
-      // filter: brightness(0) invert(1);
+      width: 20px;
+      height: 20px;
+      opacity: 0.6;
+      transition: all 0.25s ease;
+      filter: brightness(0) invert(1);
     }
+
+    .nav-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      transition: color 0.25s ease;
+      line-height: 1;
+    }
+
+    &:hover {
+      background: rgba(29, 111, 164, 0.18);
+      border-color: rgba(29, 111, 164, 0.3);
+      color: rgba(255, 255, 255, 0.9);
+
+      img {
+        opacity: 1;
+        filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(59, 159, 209, 0.6));
+      }
+
+      .nav-label {
+        color: rgba(255, 255, 255, 0.75);
+      }
+    }
+
+    &.active-link {
+      background: rgba(29, 111, 164, 0.3);
+      border-color: rgba(29, 111, 164, 0.5);
+      color: #fff;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: 25%;
+        bottom: 25%;
+        width: 3px;
+        background: var(--icu-accent-light);
+        border-radius: 0 3px 3px 0;
+      }
+
+      img {
+        opacity: 1;
+        filter: brightness(0) invert(1);
+      }
+
+      .nav-label {
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+  }
+
+  // Divider between logo and nav
+  .divider {
+    width: 36px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.07);
+    margin: 4px 0 8px;
+  }
+
+  // Bottom section for settings
+  .bottom-nav {
+    margin-top: auto;
   }
 }

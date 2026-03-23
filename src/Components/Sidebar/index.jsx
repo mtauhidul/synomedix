@@ -1,49 +1,63 @@
 import * as React from "react";
-// material ui
 import Box from "@mui/material/Box";
+import { Link, useLocation } from "react-router-dom";
 
-import { Link } from "react-router-dom";
-
-// logo
 import DashboardIcon from "../../assets/dashboard.svg";
 import Logo from "../../assets/med.png";
 import SettingIcon from "../../assets/setting.svg";
 
-// styles
 import useWindowSize from "../../hooks/useWindowSize";
 import styles from "./Sidebar.module.scss";
 
 const Sidebar = () => {
   const { height } = useWindowSize();
+  const location = useLocation();
 
-  React.useEffect(() => {}, []);
+  const isActive = (path) => {
+    if (path === "/") return location.pathname === "/" || (location.pathname !== "/dashboard" && location.pathname !== "/setting");
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <Box
       as="div"
       className={styles.__wrapper}
-      sx={{
-        height: `${height}px`,
-      }}
+      sx={{ height: `${height}px` }}
     >
-      <Link to="/">
-        <img
-          style={{
-            height: "2.5rem",
-            width: "2.5rem",
-          }}
-          src={Logo}
-          alt="logo"
-        />
+      <Link to="/" className={styles.logo} title="SynoMedix — Patient List">
+        <img src={Logo} alt="SynoMedix logo" />
       </Link>
 
-      <Link to="/dashboard">
-        <img src={DashboardIcon} alt="dashboard" />
+      <div className={styles.divider} />
+
+      <Link
+        to="/"
+        className={`${isActive("/") && !isActive("/dashboard") && !isActive("/setting") ? styles["active-link"] : ""}`}
+        title="Patients"
+      >
+        <img src={DashboardIcon} alt="" />
+        <span className={styles["nav-label"]}>Patients</span>
       </Link>
 
-      <Link to="/setting">
-        <img src={SettingIcon} alt="setting" />
+      <Link
+        to="/dashboard"
+        className={isActive("/dashboard") ? styles["active-link"] : ""}
+        title="Analytics Dashboard"
+      >
+        <img src={DashboardIcon} alt="" />
+        <span className={styles["nav-label"]}>Analytics</span>
       </Link>
+
+      <div className={styles["bottom-nav"]}>
+        <Link
+          to="/setting"
+          className={isActive("/setting") ? styles["active-link"] : ""}
+          title="Settings"
+        >
+          <img src={SettingIcon} alt="" />
+          <span className={styles["nav-label"]}>Settings</span>
+        </Link>
+      </div>
     </Box>
   );
 };

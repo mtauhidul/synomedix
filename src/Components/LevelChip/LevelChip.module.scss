@@ -1,56 +1,40 @@
 .__risk_level {
-  height: 24px;
-  background-color: var(--high-border-color);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  padding: 0 12px;
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  box-shadow: var(--card-shadow);
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--card-shadow-hover);
-  }
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 20px;
+  border: 1px solid var(--high-border-color);
+  background: var(--critical-red-bg);
+  transition: none;
 
   p {
     font-weight: 700;
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--critical-red);
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    font-family: "Inter", sans-serif;
-    letter-spacing: 0.5px;
     margin: 0;
+    white-space: nowrap;
+    font-family: "Inter", sans-serif;
   }
 
-  // Dynamic colors based on risk level
   &.high {
-    background-color: var(--high-border-color);
-    border-color: rgba(220, 38, 38, 0.3);
-
-    p {
-      color: var(--critical-red);
-    }
+    background: var(--critical-red-bg);
+    border-color: var(--high-border-color);
+    p { color: var(--critical-red); }
   }
 
   &.medium {
-    background-color: var(--medium-border-color);
-    border-color: rgba(245, 158, 11, 0.3);
-
-    p {
-      color: var(--warning-amber);
-    }
+    background: var(--warning-amber-bg);
+    border-color: var(--warning-amber-border);
+    p { color: var(--warning-amber); }
   }
 
   &.low {
-    background-color: var(--low-border-color);
-    border-color: rgba(34, 197, 94, 0.3);
-
-    p {
-      color: var(--success-green);
-    }
+    background: var(--success-green-bg);
+    border-color: var(--low-border-color);
+    p { color: var(--success-green); }
   }
 }
