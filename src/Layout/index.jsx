@@ -10,18 +10,19 @@ const Layout = ({ children }) => {
         display: "flex",
         height: "100vh",
         overflow: "hidden",
+        background: "var(--primary-bg)",
       }}
     >
       <Sidebar />
 
       <Box
         sx={{
-          width: "100%",
-          padding: "0 10px",
+          flex: 1,
           display: "flex",
           flexDirection: "column",
           height: "100vh",
           overflow: "hidden",
+          minWidth: 0,
         }}
       >
         <SearchBar />
@@ -30,10 +31,11 @@ const Layout = ({ children }) => {
           sx={{
             display: "flex",
             alignItems: "stretch",
-            gap: "1rem",
+            gap: "12px",
             flex: 1,
             minHeight: 0,
             overflow: "hidden",
+            padding: "12px 16px 16px",
           }}
         >
           <Patients />
@@ -42,11 +44,14 @@ const Layout = ({ children }) => {
             sx={{
               backgroundColor: "#fff",
               flex: 1,
-              padding: "1.5rem 1.5rem 0 1.5rem",
-              borderRadius: "12px",
+              borderRadius: "14px",
+              border: "1px solid var(--primary-border-color)",
+              boxShadow: "var(--card-shadow)",
               minWidth: 0,
               overflow: "hidden",
               height: "100%",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             {children}

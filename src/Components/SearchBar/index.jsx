@@ -15,23 +15,19 @@ const SearchBar = () => {
 
   return (
     <div className={styles.__wrapper}>
-      {/* search left */}
+      {/* Left side: menu + search */}
       <div className={styles.leftSide}>
         <div className={styles.menuBtn}>
-          <IconButton onClick={toggleDrawer("left", true)}>
-            <img src={menuBar} alt="menu bar" className={styles.menuBar} />
+          <IconButton onClick={toggleDrawer("left", true)} size="small">
+            <img src={menuBar} alt="menu" className={styles.menuBar} />
           </IconButton>
         </div>
 
         <div className={styles.searchBar}>
-          <img
-            src={searchIcon}
-            alt="search icon"
-            className={styles.searchIcon}
-          />
+          <img src={searchIcon} alt="" className={styles.searchIcon} />
           <input
             type="text"
-            placeholder="Search Patient"
+            placeholder="Search by name or ID…"
             className={styles.searchInput}
             value={search}
             onChange={(e) => {
@@ -42,29 +38,24 @@ const SearchBar = () => {
         </div>
       </div>
 
-      {/* search right */}
-
+      {/* Right side: sort + refresh */}
       <div className={styles.rightSide}>
-        <div className={styles.sort}>
-          <select
-            className={styles.sortSelect}
-            onChange={(e) => sortPatientData(e.target.value)}
-          >
-            <option value="">Sort By</option>
-            <option value="admitted_low_to_high">LOS (High to Low)</option>
-            <option value="admitted_high_to_low">LOS (Low to High)</option>
-            <option value="risk_high_to_low">Risk (High to Low)</option>
-            <option value="risk_low_to_high">Risk (Low to High)</option>
-          </select>
-        </div>
+        <select
+          className={styles.sortSelect}
+          onChange={(e) => sortPatientData(e.target.value)}
+          defaultValue=""
+        >
+          <option value="" disabled>Sort By</option>
+          <option value="admitted_low_to_high">LOS — High to Low</option>
+          <option value="admitted_high_to_low">LOS — Low to High</option>
+          <option value="risk_high_to_low">Risk — High to Low</option>
+          <option value="risk_low_to_high">Risk — Low to High</option>
+        </select>
 
-        <div className={styles.icons}>
-          <img
-            className={styles.refreshIcon}
-            src={refreshIcon}
-            alt="refresh icon"
-            onClick={refreshData}
-          />
+        <div className={styles.divider} />
+
+        <div className={styles.refreshBtn} onClick={refreshData} title="Refresh patient data">
+          <img className={styles.refreshIcon} src={refreshIcon} alt="Refresh" />
         </div>
       </div>
     </div>

@@ -14,7 +14,9 @@ const Home = () => {
         <PatientInfo {...patient} />
       ) : (
         <div className={styles.__noPatient}>
-          <h2>No patient selected</h2>
+          <div className={styles.icon}>🏥</div>
+          <h2>Select a patient to view details</h2>
+          <p>Choose a patient from the list on the left to view<br />their clinical flags, interventions, and risk analysis.</p>
         </div>
       )}
     </section>
